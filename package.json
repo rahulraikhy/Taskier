@@ -1,5 +1,5 @@
 {
-  "name": "mern-infrastructure",
+  "name": "taskier",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

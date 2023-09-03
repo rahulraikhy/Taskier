@@ -22,7 +22,7 @@ export default function TasksPage() {
         async function fetchTasks() {
             try {
                 const response = await sendRequest('/api/tasks', 'GET');
-                setTasks(response);
+                setTasks(response.tasks);
             } catch (error) {
                 console.error('Error fetching tasks:', error);
             }
@@ -37,11 +37,11 @@ export default function TasksPage() {
                 'PUT',
                 editTask
             );
-            console.log('Task updated:', response);
+            console.log('Task updated:', response.task);
 
 
             const updatedTasks = tasks.map((task) =>
-                task._id === editTask._id ? editTask : task
+                task._id === editTask._id ? response.task : task
             );
             setTasks(updatedTasks);
             setEditTask(null);

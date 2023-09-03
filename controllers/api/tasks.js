@@ -1,55 +1,58 @@
 const TaskModel = require('../../models/task');
 
-
-async function getTask(req, res) {
-    const Task = await TaskModel.find({ user: req.user._id });
-    res.send(Task);
+async function getTasks(req, res) {
+    try {
+        const tasks = await TaskModel.find({ user: req.user._id });
+        res.status(200).json({ tasks });
+    } catch (err) {
+        res.status(500).json({ message: 'Error fetching tasks' });
+    }
 }
 
-async function saveTask(req, res) {
-
+async function createTask(req, res) {
     try {
         const newTask = await TaskModel.create({ ...req.body, user: req.user._id });
         res.status(201).json({ message: 'Task added successfully', task: newTask });
     } catch (err) {
-        console.error(err);
         res.status(500).json({ message: 'Error adding task' });
     }
 }
 
-async function deleteTask(req, res) {
-    const { task, status, description } = req.body;
-    const taskId = req.params.id;
-
+async function removeTask(req, res) {
     try {
-        await TaskModel.findByIdAndDelete(taskId);
+        const deletedTask = await TaskModel.findByIdAndDelete(req.params.id);
+        if (!deletedTask) {
+            return res.status(404).json({ message: 'Task not found' });
+        }
         res.status(200).json({ message: 'Task deleted successfully' });
     } catch (err) {
-        console.error('Error deleting task:', err);
         res.status(500).json({ message: 'Error deleting task' });
     }
 }
 
-async function updateTask(req, res) {
-    const { task, status, description, urgency } = req.body; // Added urgency
-    const taskId = req.params.id;
+async function editTask(req, res) {
+    const { task, status, description, urgency } = req.body;
 
     try {
         const updatedTask = await TaskModel.findByIdAndUpdate(
-            taskId,
-            { task, status, description, urgency }, // Include urgency for update
+            req.params.id,
+            { task, status, description, urgency },
             { new: true }
         );
-        res.status(200).json(updatedTask);
+
+        if (!updatedTask) {
+            return res.status(404).json({ message: 'Task not found' });
+        }
+
+        res.status(200).json({ message: 'Task updated successfully', task: updatedTask });
     } catch (err) {
-        console.error('Error updating task:', err);
         res.status(500).json({ message: 'Error updating task' });
     }
 }
 
 module.exports = {
-    getTask,
-    saveTask,
-    deleteTask,
-    updateTask,
+    getTasks,
+    createTask,
+    removeTask,
+    editTask,
 }

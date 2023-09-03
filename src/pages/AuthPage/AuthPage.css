@@ -1,0 +1,37 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    /* Light gray background for the page */
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333;
+    /* Dark text color */
+    margin-bottom: 1rem;
+}
+
+button {
+    background-color: #2c3e50;
+    /* Dark blue background for the button */
+    color: #ecf0f1;
+    /* Light gray color for the button text */
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #34495e;
+    /* Slightly darker blue for button hover */
+}
+
+/* You may want to add some more styles to further differentiate the SignUp and Login forms if needed. */

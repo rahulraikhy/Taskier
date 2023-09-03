@@ -68,36 +68,21 @@ export default function TasksPage() {
         <div className="tasks-page">
             <h1 className='title'>All Tasks</h1>
 
-            <DragDropContext onDragEnd={handleDragEnd}>
-                <Droppable droppableId="droppable">
-                    {(provided) => (
-                        <div className='task-cards-container' ref={provided.innerRef} {...provided.droppableProps}>
-                            {tasks.sort((a, b) => b.urgency - a.urgency).map((task, index) => (
-                                <Draggable key={task._id} draggableId={task._id} index={index}>
-                                    {(provided) => (
-                                        <div
-                                            className={`task-card ${task.status === 'completed' ? 'completed-task-card' : ''}`}
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                        >
-                                            <h3>{task.task}</h3>
-                                            <p><strong>Status:</strong> {task.status}</p>
-                                            <p><strong>Urgency:</strong> {task.urgency}</p>
-                                            <p><strong>Description:</strong> {task.description}</p>
-                                            <div className="card-actions">
-                                                <button className="edit-button" onClick={() => setEditTask(task)}>Edit</button>
-                                                <button className="remove-button" onClick={() => handleDeleteTask(task._id)}>Remove</button>
-                                            </div>
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
+            <div className='task-cards-container'>
+                {tasks.sort((a, b) => b.urgency - a.urgency).map((task) => (
+                    <div key={task._id} className={`task-card ${task.status === 'completed' ? 'completed-task-card' : ''}`}>
+                        <h3>{task.task}</h3>
+                        <p><strong>Status:</strong> {task.status}</p>
+                        <p><strong>Urgency:</strong> {task.urgency}</p>
+                        <p><strong>Description:</strong> {task.description}</p>
+                        <div className="card-actions">
+                            <button className="edit-button" onClick={() => setEditTask(task)}>Edit</button>
+                            <button className="remove-button" onClick={() => handleDeleteTask(task._id)}>Remove</button>
                         </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
+                    </div>
+                ))}
+            </div>
+
 
             {editTask && (
                 <div className="edit-task-form">

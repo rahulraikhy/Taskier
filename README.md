@@ -55,6 +55,9 @@ For this project we built a fullstack application using these tools:
 
 ## ERD
 
+![Screenshot 2023-09-03 at 22 23 48](https://github.com/rahulraikhy/Taskier/assets/121837375/e878fb84-a90f-413d-b201-4951f2c4c034)
+
+
 ## Wireframe
 
 ## MVP - Minimum Viable Product

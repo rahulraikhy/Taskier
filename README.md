@@ -28,6 +28,9 @@ Welcome to Taskier, a simple task managing site.
 
 Our goal is to create a user-friendly task managing website that enables users to effectively organize, track, and complete their daily tasks and long-term projects.
 
+![Screenshot 2023-09-03 at 22 39 24](https://github.com/rahulraikhy/Taskier/assets/121837375/f33cce8b-0bf6-448b-aff7-36c183b65224)
+
+
 **Built With**
 
 For this project we built a fullstack application using these tools:

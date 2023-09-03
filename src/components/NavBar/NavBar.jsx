@@ -12,11 +12,11 @@ export default function NavBar({ user, setUser }) {
         <nav className="navbar">
             <div className="nav-container">
                 <Link to="/tasks" className="nav-link">
-                    All Tasks
+                    All {user.name}'s Tasks
                 </Link>
                 <span className="separator">|</span>
                 <Link to="/task/new" className="nav-link">
-                    New Task
+                    Create A New Task
                 </Link>
                 <span className="separator">|</span>
                 <p className="nav-greeting">Signed in as, {user.name}</p>

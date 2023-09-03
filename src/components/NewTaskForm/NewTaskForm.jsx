@@ -18,7 +18,7 @@ export default function NewTaskForm() {
     });
     const [error, setError] = useState('');
 
-    const { task, status, urgency, description } = newTask; // Destructuring state
+    const { task, status, urgency, description } = newTask;
 
     function handleChange(evt) {
         setNewTask(prevTask => ({ ...prevTask, [evt.target.name]: evt.target.value }));
@@ -32,7 +32,6 @@ export default function NewTaskForm() {
             const response = await sendRequest('/api/tasks', 'POST', newTask);
             console.log('New task added:', response);
 
-            // Clear form inputs
             setNewTask({
                 task: '',
                 status: '',
@@ -52,6 +51,7 @@ export default function NewTaskForm() {
             <div className="form">
                 <form onSubmit={handleSubmit}>
                     <h3>New Task</h3>
+
                     <div className="form-group">
                         <InputField
                             label="Task"
@@ -67,6 +67,7 @@ export default function NewTaskForm() {
                             name="status"
                             value={status}
                             onChange={handleChange}
+                            placeholder="Please select a status"
                             options={[
                                 { value: 'not started', label: 'Not Started' },
                                 { value: 'In Progress', label: 'In Progress' },
@@ -74,6 +75,7 @@ export default function NewTaskForm() {
                             ]}
                         />
                     </div>
+
 
                     <div className="form-group">
                         <TextAreaField

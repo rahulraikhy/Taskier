@@ -63,27 +63,51 @@ export default function TasksPage() {
         }
     }
 
+    const renderTask = (task) => (
+        <div
+            key={task._id}
+            className={`task-card urgency-${task.urgency} ${task.status === 'completed' ? 'completed-task-card' : ''}`}
+        >
+            <h3>{task.task}</h3>
+            <p><strong>Status:</strong> {task.status}</p>
+            <p><strong>Urgency:</strong> {task.urgency}</p>
+            <p><strong>Description:</strong> {task.description}</p>
+            <div className="card-actions">
+                <button className="edit-button" onClick={() => setEditTask(task)}>Edit</button>
+                <button className="remove-button" onClick={() => handleDeleteTask(task._id)}>Remove</button>
+            </div>
+        </div>
+    );
 
     return (
         <div className="tasks-page">
             <h1 className='title'>All Tasks</h1>
 
+            <h2>Not Started</h2>
             <div className='task-cards-container'>
-                {tasks.sort((a, b) => b.urgency - a.urgency).map((task) => (
-                    <div
-                        key={task._id}
-                        className={`task-card urgency-${task.urgency} ${task.status === 'completed' ? 'completed-task-card' : ''}`}
-                    >
-                        <h3>{task.task}</h3>
-                        <p><strong>Status:</strong> {task.status}</p>
-                        <p><strong>Urgency:</strong> {task.urgency}</p>
-                        <p><strong>Description:</strong> {task.description}</p>
-                        <div className="card-actions">
-                            <button className="edit-button" onClick={() => setEditTask(task)}>Edit</button>
-                            <button className="remove-button" onClick={() => handleDeleteTask(task._id)}>Remove</button>
-                        </div>
-                    </div>
-                ))}
+                {tasks
+                    .filter(task => task.status === 'not started')
+                    .sort((a, b) => b.urgency - a.urgency)
+                    .map(renderTask)
+                }
+            </div>
+
+            <h2>In Progress</h2>
+            <div className='task-cards-container'>
+                {tasks
+                    .filter(task => task.status === 'In Progress')
+                    .sort((a, b) => b.urgency - a.urgency)
+                    .map(renderTask)
+                }
+            </div>
+
+            <h2>Completed</h2>
+            <div className='task-cards-container'>
+                {tasks
+                    .filter(task => task.status === 'completed')
+                    .sort((a, b) => b.urgency - a.urgency)
+                    .map(renderTask)
+                }
             </div>
 
 

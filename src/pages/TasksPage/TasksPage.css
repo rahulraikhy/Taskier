@@ -158,6 +158,8 @@ textarea:focus {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
+    border-width: 2px;
+    border-style: solid;
 }
 
 .task-card:hover {
@@ -175,7 +177,40 @@ textarea:focus {
     gap: 0.5rem;
 }
 
+.task-card {
+    /* common styles for all cards */
+    border-width: 2px;
+    border-style: solid;
+}
+
 .completed-task-card {
-    background-color: #e6ffe6;
-    /* You can choose any color of your liking */
+    border-color: transparent;
+    /* This will remove the border */
+    background-color: #A8E6CF;
+}
+
+/* Only apply urgency styles if the task is not completed */
+:not(.completed-task-card).urgency-5 {
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+:not(.completed-task-card).urgency-4 {
+    border-color: darkorange;
+    background-color: rgba(255, 140, 0, 0.1);
+}
+
+:not(.completed-task-card).urgency-3 {
+    border-color: orange;
+    background-color: rgba(255, 165, 0, 0.1);
+}
+
+:not(.completed-task-card).urgency-2 {
+    border-color: yellow;
+    background-color: rgba(255, 255, 0, 0.1);
+}
+
+:not(.completed-task-card).urgency-1 {
+    border-color: lightyellow;
+    background-color: rgba(255, 255, 224, 0.1);
 }

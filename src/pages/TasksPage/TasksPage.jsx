@@ -70,7 +70,10 @@ export default function TasksPage() {
 
             <div className='task-cards-container'>
                 {tasks.sort((a, b) => b.urgency - a.urgency).map((task) => (
-                    <div key={task._id} className={`task-card ${task.status === 'completed' ? 'completed-task-card' : ''}`}>
+                    <div
+                        key={task._id}
+                        className={`task-card urgency-${task.urgency} ${task.status === 'completed' ? 'completed-task-card' : ''}`}
+                    >
                         <h3>{task.task}</h3>
                         <p><strong>Status:</strong> {task.status}</p>
                         <p><strong>Urgency:</strong> {task.urgency}</p>

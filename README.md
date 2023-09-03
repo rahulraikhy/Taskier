@@ -41,18 +41,6 @@ For this project we built a fullstack application using these tools:
 ![Express](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 
-## Website
-
-<strong><p><a href="taskier-b3be2ded42fa.herokuapp.com/">Click to view Taskier</a></p></strong>
-
-<!-- GETTING STARTED -->
-
-## Getting Started
-
-- Visit the <a href="https://karma-coffee-abe41bfb39f9.herokuapp.com/">website, sign up or log in, and start organising those tasks!</a>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- ROADMAP -->
 
 ## Project Brief

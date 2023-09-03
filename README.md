@@ -1,7 +1,5 @@
 # Taskier - A Simple Task Managing Tool
 
-![Taskier](https://github.com/rahulraikhy/Taskier)
-
 <a name="readme-top"></a>
 
 <!-- TABLE OF CONTENTS -->

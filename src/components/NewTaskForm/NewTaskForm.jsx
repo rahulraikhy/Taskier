@@ -77,8 +77,8 @@ export default function NewTaskForm() {
                     />
                     <TextAreaField label="Description" name="description" value={description} onChange={handleChange} />
                     <div className="form-group">
-                        <button type="submit">Add Task</button>
                     </div>
+                    <button type="submit">Add Task</button>
                 </form>
                 <ErrorMessage message={error} />
             </div>

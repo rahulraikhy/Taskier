@@ -33,13 +33,13 @@ export default function TasksPage() {
     async function handleEditSubmit() {
         try {
             const response = await sendRequest(
-                `/api/tasks/${editTask._id}`, // Adjust the endpoint to include the task's ID
+                `/api/tasks/${editTask._id}`,
                 'PUT',
                 editTask
             );
             console.log('Task updated:', response);
 
-            // Update the tasks list with the edited task
+
             const updatedTasks = tasks.map((task) =>
                 task._id === editTask._id ? editTask : task
             );
@@ -55,7 +55,7 @@ export default function TasksPage() {
             const response = await sendRequest(`/api/tasks/${taskId}`, 'DELETE');
             console.log('Task deleted:', response);
 
-            // Remove the task from the tasks list
+
             const updatedTasks = tasks.filter((task) => task._id !== taskId);
             setTasks(updatedTasks);
         } catch (error) {
@@ -66,34 +66,38 @@ export default function TasksPage() {
 
     return (
         <div className="tasks-page">
-            <div className='task-table'>
-                <h1 className='title'>All Tasks</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>task</th>
-                            <th>Status</th>
-                            <th>Urgency</th>
-                            <th>Description</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tasks.sort((a, b) => b.urgency - a.urgency).map((task) => (
-                            <tr key={task._id} className={task.status === 'completed' ? 'completed-task' : ''}>
-                                <td>{task.task}</td>
-                                <td>{task.status}</td>
-                                <td>{task.urgency}</td>
-                                <td>{task.description}</td>
-                                <td>
-                                    <button className="edit-button" onClick={() => setEditTask(task)}>Edit</button>
-                                    <button className="remove-button" onClick={() => handleDeleteTask(task._id)}>Remove</button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            <h1 className='title'>All Tasks</h1>
+
+            <DragDropContext onDragEnd={handleDragEnd}>
+                <Droppable droppableId="droppable">
+                    {(provided) => (
+                        <div className='task-cards-container' ref={provided.innerRef} {...provided.droppableProps}>
+                            {tasks.sort((a, b) => b.urgency - a.urgency).map((task, index) => (
+                                <Draggable key={task._id} draggableId={task._id} index={index}>
+                                    {(provided) => (
+                                        <div
+                                            className={`task-card ${task.status === 'completed' ? 'completed-task-card' : ''}`}
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                        >
+                                            <h3>{task.task}</h3>
+                                            <p><strong>Status:</strong> {task.status}</p>
+                                            <p><strong>Urgency:</strong> {task.urgency}</p>
+                                            <p><strong>Description:</strong> {task.description}</p>
+                                            <div className="card-actions">
+                                                <button className="edit-button" onClick={() => setEditTask(task)}>Edit</button>
+                                                <button className="remove-button" onClick={() => handleDeleteTask(task._id)}>Remove</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
 
             {editTask && (
                 <div className="edit-task-form">
@@ -102,15 +106,11 @@ export default function TasksPage() {
                         className='form-input'
                         type="text"
                         value={editTask.task}
-                        onChange={(e) =>
-                            setEditTask({ ...editTask, task: e.target.value })
-                        }
+                        onChange={(e) => setEditTask({ ...editTask, task: e.target.value })}
                     />
                     <select
                         value={editTask.status}
-                        onChange={(e) =>
-                            setEditTask({ ...editTask, status: e.target.value })
-                        }
+                        onChange={(e) => setEditTask({ ...editTask, status: e.target.value })}
                     >
                         <option value="not started">Not Started</option>
                         <option value="In Progress">In Progress</option>
@@ -119,9 +119,7 @@ export default function TasksPage() {
 
                     <select
                         value={editTask.urgency}
-                        onChange={(e) =>
-                            setEditTask({ ...editTask, urgency: e.target.value })
-                        }
+                        onChange={(e) => setEditTask({ ...editTask, urgency: e.target.value })}
                     >
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -132,9 +130,7 @@ export default function TasksPage() {
                     <textarea
                         className='form-input'
                         value={editTask.description || ''}
-                        onChange={(e) =>
-                            setEditTask({ ...editTask, description: e.target.value })
-                        }
+                        onChange={(e) => setEditTask({ ...editTask, description: e.target.value })}
                     ></textarea>
                     <button onClick={handleEditSubmit}>Save</button>
                 </div>

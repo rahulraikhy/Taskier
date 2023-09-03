@@ -1,7 +1,7 @@
 import NewTaskForm from '../../components/NewTaskForm/NewTaskForm';
 import './NewTaskPage.css';
 
-export default function NewOrderPage() {
+export default function NewTaskPage() {
     return (
         <div><br />
             <NewTaskForm />

@@ -332,8 +332,12 @@ export default function TasksPage() {
 
 ## Key Learnings
 
-- **Mobile responsiveness first**
+My final project taught me that no matter how simple an idea, a well styled and polished UI can truly make the world of difference. Even with limited time, React's wide array of front-end tools gave me a lot of options to improve the UI experience, on a desktop and mobile responsive level. Having now had more experience with React, my key takeaway would be researching as many clever ways to make the front-end more interactive whilst maintaining a clean and polished UI as possible, as even the most complicated app with poor UI/UX won't match up with the simplest app with a well designed and professional UI.
+
+- Mobile responsiveness first
 - Managing and utilising state and effect
+- Implementing and utilising secure token-based user authentication and authorization
+- Create a well polished product with a simple idea over an overly complicated app with limited styling and UI build
 
 <!-- CONTRIBUTING -->
 
